@@ -41,8 +41,8 @@ app.get('/admin', async (req, res) => {
  const auth = req.headers['authorization'];
   
  if (!auth || !auth.startsWith("Basic ")) {
- res.setHeader("WWW-Authenticate", "Basic realm=admin");
- return res.status(401).send("Authentication required");
+  res.setHeader("WWW-Authenticate", "Basic realm=admin");
+  return res.status(401).send("Authentication required");
  }
   
  const base64 = auth.split(" ")[1];
@@ -50,18 +50,10 @@ app.get('/admin', async (req, res) => {
   
  const ADMIN_PASSWORD = await getAdminPassword();
  if (user === "admin" && pass === ADMIN_PASSWORD) {
- res.send("Welcome admin");
+  res.send("Welcome admin");
  } else {
- res.status(401).send("Unauthorized");
+  res.status(401).send("Unauthorized");
  }
-});
-
- const pw = req.query.pw;
-  if (pw === ADMIN_PASSWORD) {
-    res.send('Welcome admin');
-  } else {
-    res.status(401).send('Unauthorized');
-  }
 });
 
 // verbose error (debug) enabled in production
