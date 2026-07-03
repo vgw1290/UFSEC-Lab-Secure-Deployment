@@ -15,7 +15,6 @@ jobs:
           creds: ${{secrets.AZURE_CREDENTIALS}}
       - name: Push to ACR
         run: |
-          az login --service-principal -u ${{ secrets.AZURE_USER }} -p ${{ secrets.AZURE_PASS }} --tenant ${{ secrets.AZURE_TENANT }}
           az acr login -n labdeployacrvincent
           docker tag myapp:latest labdeployacrvincent.azurecr.io/myapp:latest
           docker push labdeployacrvincent.azurecr.io/myapp:latest
